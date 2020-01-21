@@ -7,9 +7,12 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+import org.springframework.transaction.annotation.Transactional;
+
 @Constraint(validatedBy = ClienteInsertValidator.class)
 @Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
+@Transactional
 public @interface ClienteInsert {
 	String message() default "Erro de validação";
 
