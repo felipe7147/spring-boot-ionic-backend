@@ -2,6 +2,7 @@ package com.felipealmeida.cursomc.domain;
 
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.felipealmeida.cursomc.domain.enums.EstadoPagamento;
 
@@ -12,6 +13,7 @@ public class PagamentoComCartao extends Pagamento {
 
 	private Integer numeroDeParcelas;
 	
+	@JsonIgnore
 	public PagamentoComCartao() {
 	}
 
