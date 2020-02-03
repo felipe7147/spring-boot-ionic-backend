@@ -15,6 +15,7 @@ import com.felipealmeida.cursomc.repositories.ItemPedidoRepository;
 import com.felipealmeida.cursomc.repositories.PagamentoRepository;
 import com.felipealmeida.cursomc.repositories.PedidoRepository;
 import com.felipealmeida.cursomc.services.exceptions.ObjectNotFoundException;
+import com.sun.xml.messaging.saaj.packaging.mime.MessagingException;
 
 
 
@@ -48,8 +49,8 @@ public class PedidoService {
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Pedido.class.getName()));
 	}
 	
-	public Pedido insert(Pedido obj) {
-		obj.setId(null);
+	public Pedido insert(Pedido obj) throws MessagingException {
+		obj.setId();
 		obj.setInstante(new Date());
 		obj.setCliente(clienteService.find(obj.getCliente().getId()));
 		obj.getPagamento().setEstado(EstadoPagamento.PENDENTE);
@@ -67,7 +68,7 @@ public class PedidoService {
 			ip.setPedido(obj);
 		}
 		itemPedidoRepository.saveAll(obj.getItens());
-		emailService.sendOrderConfirmationEmail(obj);
+		emailService.sendOrderConfirmationHtmlEmail(obj);
 		return obj;
 	}
 

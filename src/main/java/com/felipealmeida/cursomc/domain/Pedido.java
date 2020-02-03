@@ -163,4 +163,9 @@ public class Pedido implements Serializable {
 		builder.append(nf.format(getValorTotal()));
 		return builder.toString();
 	}
+
+	public void setId() {
+		// TODO Auto-generated method stub
+		
+	}
 }
