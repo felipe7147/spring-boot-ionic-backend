@@ -11,6 +11,7 @@ import org.springframework.ws.mime.MimeMessage;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
+import com.felipealmeida.cursomc.domain.Cliente;
 import com.felipealmeida.cursomc.domain.Pedido;
 import com.sun.xml.messaging.saaj.packaging.mime.MessagingException;
 
@@ -66,6 +67,23 @@ public abstract class AbastractEmailService implements EmailService {
 		mmh.setText(htmlFromTemplatePedido(obj), true);
 		
 		return mimeMessage;
+	}
+	
+	@Override
+	public void sendNewPasswordEmail(Cliente cliente, String newPass) {
+		SimpleMailMessage sm = prepareSimpleMailMessageFromPedido(cliente, newPass);
+		sendEmail(sm);
+	}
+
+	protected SimpleMailMessage prepareSimpleMailMessageFromPedido(Cliente cliente, String newPass) {
+		SimpleMailMessage sm = new SimpleMailMessage();
+	      sm.setTo(cliente.getEmail());
+	      sm.setFrom(sender);
+	      sm.setSubject("Solicitacao de nova senha");
+	      sm.setSentDate(new Date(System.currentTimeMillis()));
+	      sm.setText("Nova senha: " + newPass);
+	      
+			return sm;
 	}
 	
 }
