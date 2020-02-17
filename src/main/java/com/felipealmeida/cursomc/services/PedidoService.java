@@ -5,8 +5,11 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import com.felipealmeida.cursomc.domain.Cliente;
 import com.felipealmeida.cursomc.domain.ItemPedido;
 import com.felipealmeida.cursomc.domain.PagamentoComBoleto;
 import com.felipealmeida.cursomc.domain.Pedido;
@@ -14,8 +17,9 @@ import com.felipealmeida.cursomc.domain.enums.EstadoPagamento;
 import com.felipealmeida.cursomc.repositories.ItemPedidoRepository;
 import com.felipealmeida.cursomc.repositories.PagamentoRepository;
 import com.felipealmeida.cursomc.repositories.PedidoRepository;
+import com.felipealmeida.cursomc.security.UserSS;
+import com.felipealmeida.cursomc.services.exceptions.AuthorizationException;
 import com.felipealmeida.cursomc.services.exceptions.ObjectNotFoundException;
-import com.sun.xml.messaging.saaj.packaging.mime.MessagingException;
 
 
 
@@ -49,8 +53,8 @@ public class PedidoService {
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Pedido.class.getName()));
 	}
 	
-	public Pedido insert(Pedido obj) throws MessagingException {
-		obj.setId();
+	public Pedido insert(Pedido obj) {
+		obj.setId(null);
 		obj.setInstante(new Date());
 		obj.setCliente(clienteService.find(obj.getCliente().getId()));
 		obj.getPagamento().setEstado(EstadoPagamento.PENDENTE);
@@ -68,12 +72,17 @@ public class PedidoService {
 			ip.setPedido(obj);
 		}
 		itemPedidoRepository.saveAll(obj.getItens());
-		emailService.sendOrderConfirmationHtmlEmail(obj);
+		emailService.sendOrderConfirmationEmail(obj);
 		return obj;
 	}
-
+	
 	public Page<Pedido> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
-		
-		return null;
+		UserSS user = UserService.autheticated();
+		if (user == null) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		Cliente cliente =  clienteService.find(user.getId());
+		return repo.findByCliente(cliente, pageRequest);
 	}
 }
