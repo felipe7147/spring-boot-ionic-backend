@@ -64,6 +64,7 @@ public class ClienteResource {
 		return ResponseEntity.noContent().build();
 	}
 
+	 @PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<ClienteDTO>> findAll() {
 		List<Cliente> list = service.findAll();
@@ -71,6 +72,7 @@ public class ClienteResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 
+	 @PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value= "/page" ,method = RequestMethod.GET)
 	public ResponseEntity<Page<ClienteDTO>> findPage(
 			@RequestParam(value="Page",defaultValue="0") Integer page,
