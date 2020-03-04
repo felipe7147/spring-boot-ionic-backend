@@ -11,6 +11,8 @@ import com.felipealmeida.cursomc.services.DBservice;
 import com.felipealmeida.cursomc.services.EmailService;
 import com.felipealmeida.cursomc.services.MockEmailService;
 
+
+
 @Configuration
 @Profile("test")
 public class TestConfig {
@@ -28,5 +30,4 @@ public class TestConfig {
 	public EmailService emailService() {
 		return new MockEmailService();
 	}
-
 }

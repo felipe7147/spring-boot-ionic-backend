@@ -12,6 +12,8 @@ import com.felipealmeida.cursomc.services.DBservice;
 import com.felipealmeida.cursomc.services.EmailService;
 import com.felipealmeida.cursomc.services.SmtpEmailService;
 
+
+
 @Configuration
 @Profile("dev")
 public class DevConfig {
@@ -25,7 +27,7 @@ public class DevConfig {
 	@Bean
 	public boolean instantiateDatabase() throws ParseException {
 		
-		if(!"create".equals(strategy)) {
+		if (!"create".equals(strategy)) {
 			return false;
 		}
 		
@@ -37,5 +39,4 @@ public class DevConfig {
 	public EmailService emailService() {
 		return new SmtpEmailService();
 	}
-
 }

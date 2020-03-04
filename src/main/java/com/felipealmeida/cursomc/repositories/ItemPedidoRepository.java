@@ -5,7 +5,10 @@ import org.springframework.stereotype.Repository;
 
 import com.felipealmeida.cursomc.domain.ItemPedido;
 
+
+
 @Repository
-public interface ItemPedidoRepository extends JpaRepository <ItemPedido,Integer> {
+public interface ItemPedidoRepository extends JpaRepository<ItemPedido, Integer> {
 
 }
+

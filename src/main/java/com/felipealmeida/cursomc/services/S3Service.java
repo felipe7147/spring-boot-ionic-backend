@@ -16,6 +16,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.felipealmeida.cursomc.services.exceptions.FileException;
 
+
 @Service
 public class S3Service {
 
@@ -34,11 +35,11 @@ public class S3Service {
 			String contentType = multipartFile.getContentType();
 			return uploadFile(is, fileName, contentType);
 		} catch (IOException e) {
-           throw new FileException("Erro de IO: "+ e.getMessage());
-
+			throw new FileException("Erro de IO: " + e.getMessage());
 		}
-
 	}
+
+
 
 	public URI uploadFile(InputStream is, String fileName, String contentType) {
 		try {

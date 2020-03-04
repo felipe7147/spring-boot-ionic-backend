@@ -126,7 +126,3 @@ public class ItemPedido implements Serializable {
 		return builder.toString();
 	}
 }
-	
-	
-
-

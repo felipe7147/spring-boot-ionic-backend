@@ -16,6 +16,8 @@ import com.felipealmeida.cursomc.security.UserSS;
 import com.felipealmeida.cursomc.services.AuthService;
 import com.felipealmeida.cursomc.services.UserService;
 
+
+
 @RestController
 @RequestMapping(value = "/auth")
 public class AuthResource {

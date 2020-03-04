@@ -10,9 +10,9 @@ import com.felipealmeida.cursomc.domain.Cliente;
 import com.felipealmeida.cursomc.repositories.ClienteRepository;
 import com.felipealmeida.cursomc.services.exceptions.ObjectNotFoundException;
 
+
 @Service
 public class AuthService {
-	
 
 	@Autowired
 	private ClienteRepository clienteRepository;
@@ -60,6 +60,3 @@ public class AuthService {
 		}
 	}
 }
-	
-
-

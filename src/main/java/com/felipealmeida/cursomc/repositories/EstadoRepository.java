@@ -8,9 +8,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.felipealmeida.cursomc.domain.Estado;
 
+
+
 @Repository
 public interface EstadoRepository extends JpaRepository<Estado, Integer> {
-	@Transactional(readOnly = true)
+
+	@Transactional(readOnly=true)
 	public List<Estado> findAllByOrderByNome();
-	
 }
+

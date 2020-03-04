@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import com.felipealmeida.cursomc.domain.Estado;
 
+
+
 public class EstadoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.felipealmeida.cursomc.domain.Estado;
 import com.felipealmeida.cursomc.repositories.EstadoRepository;
 
+
+
 @Service
 public class EstadoService {
 	

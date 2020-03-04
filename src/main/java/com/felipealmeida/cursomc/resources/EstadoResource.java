@@ -17,6 +17,8 @@ import com.felipealmeida.cursomc.dto.EstadoDTO;
 import com.felipealmeida.cursomc.services.CidadeService;
 import com.felipealmeida.cursomc.services.EstadoService;
 
+
+
 @RestController
 @RequestMapping(value="/estados")
 public class EstadoResource {

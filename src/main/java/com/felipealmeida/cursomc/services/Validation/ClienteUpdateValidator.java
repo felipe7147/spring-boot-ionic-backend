@@ -16,15 +16,15 @@ import com.felipealmeida.cursomc.dto.ClienteDTO;
 import com.felipealmeida.cursomc.repositories.ClienteRepository;
 import com.felipealmeida.cursomc.resources.exception.FieldMessage;
 
+
+
 public class ClienteUpdateValidator implements ConstraintValidator<ClienteUpdate, ClienteDTO> {
-	
+
 	@Autowired
 	private HttpServletRequest request;
 	
-	
 	@Autowired
 	private ClienteRepository repo;
-	
 	
 	@Override
 	public void initialize(ClienteUpdate ann) {
@@ -32,18 +32,18 @@ public class ClienteUpdateValidator implements ConstraintValidator<ClienteUpdate
 
 	@Override
 	public boolean isValid(ClienteDTO objDto, ConstraintValidatorContext context) {
-		List<FieldMessage> list = new ArrayList<>();
 		
 		@SuppressWarnings("unchecked")
-		Map<String, String> map =(Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
+		Map<String, String> map = (Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
 		Integer uriId = Integer.parseInt(map.get("id"));
 		
+		List<FieldMessage> list = new ArrayList<>();
+		
 		Cliente aux = repo.findByEmail(objDto.getEmail());
-		if(aux != null && aux.getId().equals(uriId)) {
-			list.add(new FieldMessage("email","Email ja existente"));
+		if (aux != null && !aux.getId().equals(uriId)) {
+			list.add(new FieldMessage("email", "Email já existente"));
 		}
-		
-		
+
 		for (FieldMessage e : list) {
 			context.disableDefaultConstraintViolation();
 			context.buildConstraintViolationWithTemplate(e.getMessage()).addPropertyNode(e.getFieldName())
@@ -52,3 +52,4 @@ public class ClienteUpdateValidator implements ConstraintValidator<ClienteUpdate
 		return list.isEmpty();
 	}
 }
+

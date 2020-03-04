@@ -5,7 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import com.felipealmeida.cursomc.domain.Endereco;
 
+
+
 @Repository
-public interface EnderecoRepository extends JpaRepository <Endereco,Integer> {
+public interface EnderecoRepository extends JpaRepository<Endereco, Integer> {
 
 }
